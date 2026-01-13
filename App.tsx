@@ -237,7 +237,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-full flex flex-col lg:flex-row overflow-hidden p-4 lg:p-6 gap-4 lg:gap-8 relative">
+    <div className="min-h-screen lg:h-screen w-full flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden p-4 lg:p-6 gap-6 lg:gap-8 relative">
       {showCelebration && <EnhancedCelebration customImage={wheelConfig.customFallingImage} />}
 
       {/* Language Switcher */}
@@ -249,8 +249,8 @@ const App: React.FC = () => {
         {lang === 'zh' ? 'English' : '中文'}
       </button>
 
-      {/* Side Panel */}
-      <div className="w-full lg:w-[420px] maple-window flex flex-col shrink-0 overflow-hidden shadow-2xl">
+      {/* Side Panel (Settings & Prizes) - Order 2 on mobile */}
+      <div className="order-2 lg:order-1 w-full lg:w-[420px] maple-window flex flex-col shrink-0 overflow-hidden shadow-2xl h-[500px] lg:h-full">
         <div className="maple-header px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Sword className="w-4 h-4" />
@@ -437,17 +437,17 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Wheel Area */}
-      <div className="flex-1 flex flex-col items-center justify-center relative">
-        <div className="text-center mb-10">
-          <h1 className="text-5xl lg:text-6xl font-black text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] tracking-tighter mb-2">{wheelConfig.title}</h1>
-          <p className="text-yellow-200/90 font-bold uppercase text-xs lg:text-sm tracking-[0.5em] drop-shadow-md">{wheelConfig.subtitle}</p>
+      {/* Main Wheel Area - Order 1 on mobile */}
+      <div className="order-1 lg:order-2 flex-1 flex flex-col items-center justify-center py-4 sm:py-0 relative">
+        <div className="text-center mb-6 sm:mb-10">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] tracking-tighter mb-1 sm:mb-2">{wheelConfig.title}</h1>
+          <p className="text-yellow-200/90 font-bold uppercase text-[10px] sm:text-xs lg:text-sm tracking-[0.3em] sm:tracking-[0.5em] drop-shadow-md">{wheelConfig.subtitle}</p>
         </div>
 
-        <div className="bg-black/40 backdrop-blur-md border border-white/20 px-10 py-3 rounded-full flex items-center gap-6 shadow-2xl mb-12">
-          <span className="text-[10px] font-black text-white/40 uppercase tracking-widest border-r border-white/10 pr-6">{t.adventurer}</span>
+        <div className="bg-black/40 backdrop-blur-md border border-white/20 px-6 sm:px-10 py-2 sm:py-3 rounded-full flex items-center gap-4 sm:gap-6 shadow-2xl mb-8 sm:mb-12">
+          <span className="text-[9px] sm:text-[10px] font-black text-white/40 uppercase tracking-widest border-r border-white/10 pr-4 sm:pr-6">{t.adventurer}</span>
           <select value={selectedParticipantId} onChange={(e) => setSelectedParticipantId(e.target.value)} disabled={isSpinning}
-            className="bg-transparent text-2xl font-black text-white focus:outline-none cursor-pointer pr-4">
+            className="bg-transparent text-lg sm:text-2xl font-black text-white focus:outline-none cursor-pointer pr-4">
             {participants.map(p => <option key={p.id} value={p.id} className="bg-[#1e3c78]">{p.name} ({p.entries})</option>)}
           </select>
         </div>
@@ -455,13 +455,13 @@ const App: React.FC = () => {
         <Wheel prizes={prizes} config={wheelConfig} isSpinning={isSpinning} onSpinEnd={handleSpinEnd} />
 
         <button onClick={startSpin} disabled={isSpinning || !currentParticipant || currentParticipant.entries <= 0 || activePrizes.length === 0}
-          className={`mt-10 px-28 py-7 rounded-3xl text-3xl font-black transition-all transform shadow-2xl active:scale-95 border-b-8 border-black/40 ${isSpinning || !currentParticipant || currentParticipant.entries <= 0 || activePrizes.length === 0 ? 'bg-gray-600 text-gray-400 cursor-not-allowed shadow-none border-none' : 'bg-[#FFD54F] text-[#5D4037] hover:bg-yellow-400 hover:-translate-y-2'}`}>
+          className={`mt-8 sm:mt-10 px-16 sm:px-28 py-5 sm:py-7 rounded-2xl sm:rounded-3xl text-xl sm:text-3xl font-black transition-all transform shadow-2xl active:scale-95 border-b-4 sm:border-b-8 border-black/40 ${isSpinning || !currentParticipant || currentParticipant.entries <= 0 || activePrizes.length === 0 ? 'bg-gray-600 text-gray-400 cursor-not-allowed shadow-none border-none' : 'bg-[#FFD54F] text-[#5D4037] hover:bg-yellow-400 hover:-translate-y-2'}`}>
           {isSpinning ? t.spinning : t.draw}
         </button>
       </div>
 
-      {/* History Log */}
-      <div className="w-full lg:w-[320px] maple-window flex flex-col shrink-0">
+      {/* History Log - Order 3 on mobile */}
+      <div className="order-3 w-full lg:w-[320px] maple-window flex flex-col shrink-0 h-[300px] lg:h-full">
         <div className="maple-header px-4 py-3 flex items-center justify-between">
            <div className="flex items-center gap-2">
             <MessageSquare className="w-4 h-4" />
@@ -493,20 +493,20 @@ const App: React.FC = () => {
 
       {/* Winner Modal */}
       {winnerResult && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/90 backdrop-blur-xl animate-in fade-in duration-500">
-          <div className={`maple-window border-[4px] border-white rounded-2xl p-10 max-w-lg w-full text-center relative overflow-hidden animate-in zoom-in duration-500 shadow-2xl ${winnerResult.prize.isGrandPrize ? 'ring-8 ring-yellow-400/50' : ''}`}>
-            <div className="maple-header absolute top-0 left-0 w-full py-2 font-black text-sm uppercase tracking-widest">{winnerResult.prize.isGrandPrize ? t.grandTitle : t.missionComplete}</div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-xl animate-in fade-in duration-500">
+          <div className={`maple-window border-[3px] sm:border-[4px] border-white rounded-2xl p-6 sm:p-10 max-w-lg w-full text-center relative overflow-hidden animate-in zoom-in duration-500 shadow-2xl ${winnerResult.prize.isGrandPrize ? 'ring-8 ring-yellow-400/50' : ''}`}>
+            <div className="maple-header absolute top-0 left-0 w-full py-2 font-black text-xs sm:text-sm uppercase tracking-widest">{winnerResult.prize.isGrandPrize ? t.grandTitle : t.missionComplete}</div>
             {wheelConfig.winnerEffect && <div className="absolute inset-0 pointer-events-none opacity-50 z-0"><img src={wheelConfig.winnerEffect} className="w-full h-full object-cover animate-pulse" /></div>}
-            <div className="mt-8 mb-6 flex justify-center relative z-10">
-              {winnerResult.prize.image ? <img src={winnerResult.prize.image} className="w-48 h-48 object-cover rounded-2xl border-4 border-white shadow-2xl" /> : <div className="w-36 h-36 bg-yellow-400 rounded-full flex items-center justify-center border-4 border-white shadow-2xl relative"><span className="text-8xl">{winnerResult.prize.icon || '🏆'}</span>{winnerResult.prize.isGrandPrize && <div className="absolute -top-4 -right-4 bg-red-500 text-white text-[10px] font-black px-2 py-1 rounded shadow-lg animate-bounce uppercase">Legendary!</div>}</div>}
+            <div className="mt-8 mb-4 sm:mb-6 flex justify-center relative z-10">
+              {winnerResult.prize.image ? <img src={winnerResult.prize.image} className="w-32 h-32 sm:w-48 sm:h-48 object-cover rounded-2xl border-4 border-white shadow-2xl" /> : <div className="w-24 h-24 sm:w-36 sm:h-36 bg-yellow-400 rounded-full flex items-center justify-center border-4 border-white shadow-2xl relative"><span className="text-5xl sm:text-8xl">{winnerResult.prize.icon || '🏆'}</span>{winnerResult.prize.isGrandPrize && <div className="absolute -top-3 -right-3 bg-red-500 text-white text-[8px] sm:text-[10px] font-black px-2 py-1 rounded shadow-lg animate-bounce uppercase">Legendary!</div>}</div>}
             </div>
-            <div className={`text-5xl font-black text-white mb-6 tracking-tighter drop-shadow-lg relative z-10 ${winnerResult.prize.isGrandPrize ? 'animate-pulse' : ''}`}>{winnerResult.prize.label}</div>
-            <div className="bg-white/5 border border-white/10 rounded-2xl py-6 mb-8 relative z-10 backdrop-blur-sm"><span className="text-[10px] text-white/40 font-black block mb-2 uppercase tracking-widest">{t.winner}</span><span className="text-5xl font-black text-yellow-400 tracking-widest">{winnerResult.person}</span></div>
-            <div className="grid grid-cols-2 gap-4 relative z-10">
-              <button onClick={() => { setWinnerResult(null); setShowCelebration(false); }} className="bg-white/10 border border-white/20 py-4 rounded-xl font-black text-sm text-white hover:bg-white/20 transition-all uppercase">{t.close}</button>
-              <button onClick={() => { setWinnerResult(null); setShowCelebration(false); setTimeout(startSpin, 300); }} className="bg-[#FFD54F] py-4 rounded-xl font-black text-sm text-[#5D4037] shadow-xl hover:bg-yellow-400 transition-all flex items-center justify-center gap-2 uppercase"><RefreshCw className="w-4 h-4" /> {t.retry}</button>
+            <div className={`text-3xl sm:text-5xl font-black text-white mb-4 sm:mb-6 tracking-tighter drop-shadow-lg relative z-10 ${winnerResult.prize.isGrandPrize ? 'animate-pulse' : ''}`}>{winnerResult.prize.label}</div>
+            <div className="bg-white/5 border border-white/10 rounded-2xl py-4 sm:py-6 mb-6 sm:mb-8 relative z-10 backdrop-blur-sm"><span className="text-[9px] sm:text-[10px] text-white/40 font-black block mb-1 sm:mb-2 uppercase tracking-widest">{t.winner}</span><span className="text-3xl sm:text-5xl font-black text-yellow-400 tracking-widest">{winnerResult.person}</span></div>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 relative z-10">
+              <button onClick={() => { setWinnerResult(null); setShowCelebration(false); }} className="bg-white/10 border border-white/20 py-3 sm:py-4 rounded-xl font-black text-xs sm:text-sm text-white hover:bg-white/20 transition-all uppercase">{t.close}</button>
+              <button onClick={() => { setWinnerResult(null); setShowCelebration(false); setTimeout(startSpin, 300); }} className="bg-[#FFD54F] py-3 sm:py-4 rounded-xl font-black text-xs sm:text-sm text-[#5D4037] shadow-xl hover:bg-yellow-400 transition-all flex items-center justify-center gap-2 uppercase"><RefreshCw className="w-4 h-4" /> {t.retry}</button>
             </div>
-            <p className="mt-6 text-[10px] text-white/40 font-black italic relative z-10 uppercase">{t.remTickets}: {currentParticipant?.entries}</p>
+            <p className="mt-4 sm:mt-6 text-[9px] sm:text-[10px] text-white/40 font-black italic relative z-10 uppercase">{t.remTickets}: {currentParticipant?.entries}</p>
           </div>
         </div>
       )}

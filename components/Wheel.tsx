@@ -172,17 +172,19 @@ const Wheel: React.FC<WheelProps> = ({ prizes, config, onSpinEnd, isSpinning }) 
   }, [isSpinning]);
 
   return (
-    <div className="relative">
-      <div className="absolute top-[-45px] left-1/2 -translate-x-1/2 z-20 animate-leaf drop-shadow-2xl">
-        <svg width="55" height="55" viewBox="0 0 24 24" fill="#E53935" className="rotate-180 drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
+    <div className="relative w-full max-w-[90vw] sm:max-w-[550px] aspect-square flex items-center justify-center">
+      {/* 指針 */}
+      <div className="absolute top-[-30px] left-1/2 -translate-x-1/2 z-20 animate-leaf drop-shadow-2xl">
+        <svg width="45" height="45" viewBox="0 0 24 24" fill="#E53935" className="rotate-180 drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
           <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
         </svg>
       </div>
+      {/* 轉盤畫布 */}
       <canvas 
         ref={canvasRef} 
         width={550} 
         height={550} 
-        className="rounded-full shadow-2xl border-8 border-white/40 bg-white/5" 
+        className="w-full h-full rounded-full shadow-2xl border-4 sm:border-8 border-white/40 bg-white/5" 
       />
     </div>
   );
