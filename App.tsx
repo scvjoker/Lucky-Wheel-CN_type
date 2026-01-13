@@ -177,7 +177,7 @@ const App: React.FC = () => {
     const saved = localStorage.getItem(STORAGE_KEYS.CONFIG);
     return saved ? JSON.parse(saved) : { 
       duration: 5, rotations: 10, direction: 'cw', bounceIntensity: 3,
-      title: 'Victoria Island Lotto', subtitle: 'Find the Lucky Adventurer',
+      title: '希恩大樂透', subtitle: 'Why u all win my money',
       showProbabilityOnWheel: true
     };
   });
