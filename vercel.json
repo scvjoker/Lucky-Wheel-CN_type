@@ -3,7 +3,7 @@
   "version": 2,
   "framework": null,
   "buildCommand": null,
-  "installCommand": "echo 'Skipping install'",
+  "installCommand": "echo 'Skipping dependencies'",
   "outputDirectory": ".",
   "cleanUrls": true,
   "rewrites": [

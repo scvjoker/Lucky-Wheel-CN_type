@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +13,10 @@
             font-family: 'Quicksand', 'Noto Sans TC', sans-serif;
             margin: 0;
             overflow: hidden;
-            /* 楓之谷冒險背景：藍天綠地漸層 */
             background: linear-gradient(to bottom, #87CEEB 0%, #E0F7FA 50%, #A5D6A7 100%);
             background-attachment: fixed;
         }
 
-        /* 楓之谷經典藍色視窗質感 */
         .maple-window {
             background: rgba(30, 60, 120, 0.85);
             backdrop-filter: blur(4px);
@@ -35,16 +33,10 @@
             border-radius: 6px 6px 0 0;
         }
 
-        /* 像素風格裝飾 */
-        .pixel-border {
-            image-rendering: pixelated;
-        }
-
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #FFD54F; border-radius: 10px; border: 1px solid #F9A825; }
 
-        /* 楓葉浮動動畫 */
         @keyframes leaf-float {
             0% { transform: translateY(0) rotate(0); }
             50% { transform: translateY(-10px) rotate(10deg); }
@@ -66,5 +58,7 @@
 </head>
 <body>
     <div id="root"></div>
+    <!-- 明確加入入口文件 -->
+    <script type="module" src="index.tsx"></script>
 </body>
 </html>

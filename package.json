@@ -5,9 +5,6 @@
   "private": true,
   "description": "A static ESM-based lottery wheel application.",
   "scripts": {
-    "build": "echo 'Static build - no action needed'",
-    "install": "echo 'No dependencies to install'"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+    "build": "echo 'Static Site - No Build Required'"
+  }
 }
