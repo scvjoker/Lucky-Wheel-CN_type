@@ -1,15 +1,4 @@
 
 {
-  "version": 2,
-  "framework": null,
-  "buildCommand": null,
-  "installCommand": "echo 'Skipping dependencies'",
-  "outputDirectory": ".",
-  "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  "framework": "vite"
 }
